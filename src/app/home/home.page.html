@@ -1,0 +1,166 @@
+<ion-header [translucent]="false" >
+  <ion-toolbar  >
+    <ion-item>
+      <ion-label style="font-weight: 800; font-size: 3em;">
+        Hoje
+        <p style="font-weight: 400; color: #433465">{{today | date:'fullDate'}}</p>
+      </ion-label>
+    </ion-item>
+  </ion-toolbar>
+</ion-header>
+
+  <!--<ion-button (click)="insertDefaultItems()" [strong]="true">Inserir itens aleatorios</ion-button>
+  <ion-button (click)="getTodoList()" [strong]="true">getTodoList</ion-button>
+
+
+             <p>A contagem atual é de {{todoList.length}}</p>-->
+
+
+
+
+<form [formGroup]="ionicForm" (ngSubmit)="submitForm()" novalidate class="form">
+  <ion-item lines="full">
+    <ion-label position="floating">Placa</ion-label>
+    <ion-input
+      formControlName="placa"
+      type="text"
+    ></ion-input>
+  </ion-item>
+  <div
+    *ngIf="this.ionicForm.controls?.['placa']?.['touched'] && this.ionicForm.controls?.['placa']?.['invalid']"
+  >
+    <div
+      class="error ion-padding"
+      *ngIf="errorControl?.['placa']?.errors?.['required']"
+    >
+      <ion-text color="danger">Placa é obrigatória.</ion-text>
+    </div>
+  </div>
+  <ion-item lines="full">
+    <ion-label position="floating">Renavam</ion-label>
+    <ion-input
+      formControlName="renavam"
+      type="text"
+    ></ion-input>
+  </ion-item>
+  <div
+    *ngIf="this.ionicForm.controls?.['renavam']?.['touched'] && this.ionicForm.controls?.['renavam']?.['invalid']"
+  >
+    <div
+      class="error ion-padding"
+      *ngIf="errorControl?.['renavam']?.errors?.['required']"
+    >
+      <ion-text color="danger">Renavam é obrigatório.</ion-text>
+    </div>
+    <div
+      class="error ion-padding"
+      *ngIf="errorControl?.['renavam']?.errors?.['minlength']"
+    >
+      <ion-text color="danger">Renavam tem que ser maior que 8.</ion-text>
+    </div>
+    <div
+      class="error ion-padding"
+      *ngIf="errorControl?.['renavam']?.errors?.['maxlength']"
+    >
+      <ion-text color="danger">Renavam tem que ser menor que 12.</ion-text>
+    </div>
+    <div
+      class="error ion-padding"
+      *ngIf="errorControl?.['renavam']?.errors?.['pattern']"
+    >
+      <ion-text color="danger">Renavam tem que ter só números.</ion-text>
+    </div>
+  </div>
+
+  <ion-item lines="full">
+    <ion-label position="floating">UF</ion-label>
+    <ion-input
+      formControlName="uf"
+      type="text"
+    ></ion-input>
+  </ion-item>
+  <div
+    *ngIf="this.ionicForm.controls?.['uf']?.['touched'] && this.ionicForm.controls?.['uf']?.['invalid']"
+  >
+    <div
+      class="error ion-padding"
+      *ngIf="errorControl?.['uf']?.errors?.['required']"
+    >
+      <ion-text color="danger">Uf é obrigatório.</ion-text>
+    </div>
+    <div
+      class="error ion-padding"
+      *ngIf="errorControl?.['uf']?.errors?.['minlength']"
+    >
+      <ion-text color="danger">Uf tem que ser maior que 1.</ion-text>
+    </div>
+    <div
+      class="error ion-padding"
+      *ngIf="errorControl?.['uf']?.errors?.['maxlength']"
+    >
+      <ion-text color="danger">Uf tem que ser menor que 3.</ion-text>
+    </div>
+  </div>
+
+
+  <ion-row>
+    <ion-col>
+      <ion-button  type="submit" color="danger" expand="block"
+        >Consultar</ion-button
+      >
+    </ion-col>
+  </ion-row>
+</form>
+
+<ion-content padding style="overflow:scroll;" >
+    <ion-card *ngIf="consultado">
+
+      <ion-row>
+        <ion-item>
+          Placa: {{consulta?.PLACA}}
+        </ion-item>
+        <ion-item *ngIf="consulta.MENSAGEM">
+          <p>{{consulta.MENSAGEM}}</p>
+        </ion-item>
+      </ion-row>
+
+      <ion-row>
+        <ion-item>
+          Renavam: <p>{{consulta.RENAVAM}}</p>
+        </ion-item>
+        <ion-item>
+          Uf: <p>{{consulta.UF}}</p>
+        </ion-item>
+
+
+      </ion-row>
+
+      <ion-row>
+        <ion-item>
+          IPVA: <p>{{consulta.IPVA}}</p>
+
+        </ion-item>
+
+        <ion-item>
+          LICENCIAMENTO: <p>{{consulta.LICENCIAMENTO}}</p>
+        </ion-item>
+      </ion-row>
+      <ion-row>
+        <ion-item>
+          MULTAS: <p>{{consulta.MULTAS}}</p>
+        </ion-item>
+
+        <ion-item>
+          DPVAT: <p>{{consulta.DPVAT}}</p>
+        </ion-item>
+      </ion-row>
+
+
+
+    </ion-card>
+</ion-content>
+
+
+
+
+
